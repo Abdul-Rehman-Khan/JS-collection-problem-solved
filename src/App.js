@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { GrandParents, Parents, GrandChildren } from './datsource';
+
 
 class App extends Component {
+  constructor(props, context) {
+    super(props);
+
+  }
+
+  handleInputChange = (e) => {
+    let userInput = e.target.value.toString();
+
+    //method 1
+
+    // if (userInput === "cat_1" || userInput === "cat_2" || userInput === "cat_3") {
+    //   GrandParents.map((val) => {
+    //     GrandChildren.map((data, index) => {
+    //                 if (userInput == val.category) {
+    //         if (val.category == data.category.split("_")[0] + "_" + data.category.split("_")[1]) {
+    //             console.log(data)
+    //         }
+    //       }
+    //     })
+    //   })
+    // }
+
+    //method2
+
+
+    Parents.map((data) => {
+      GrandChildren.map((values) => {
+        if (values.parent == data.id && data.parent == userInput) {
+          console.log(values)
+        }
+      })
+    })
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <input placeholder="Enter Category" onChange={this.handleInputChange} />
       </div>
     );
   }
