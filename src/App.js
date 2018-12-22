@@ -11,7 +11,7 @@ class App extends Component {
 
   handleInputChange = (e) => {
     let userInput = e.target.value.toString();
-
+    let Result = [];
     //method 1
 
     // if (userInput === "cat_1" || userInput === "cat_2" || userInput === "cat_3") {
@@ -28,14 +28,14 @@ class App extends Component {
 
     //method2
 
-
     Parents.map((data) => {
       GrandChildren.map((values) => {
         if (values.parent == data.id && data.parent == userInput) {
-          console.log(values)
+          Result.push(values)
         }
       })
     })
+    console.log(Result)
   }
   render() {
     return (
