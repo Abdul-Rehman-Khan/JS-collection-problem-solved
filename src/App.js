@@ -10,37 +10,22 @@ class App extends Component {
   }
 
   handleInputChange = (e) => {
-    let userInput = e.target.value.toString();
-    let Result = [];
-    //method 1
-
-    // if (userInput === "cat_1" || userInput === "cat_2" || userInput === "cat_3") {
-    //   GrandParents.map((val) => {
-    //     GrandChildren.map((data, index) => {
-    //                 if (userInput == val.category) {
-    //         if (val.category == data.category.split("_")[0] + "_" + data.category.split("_")[1]) {
-    //             console.log(data)
-    //         }
-    //       }
-    //     })
-    //   })
-    // }
-
-    //method2
-
-    Parents.map((data) => {
-      GrandChildren.map((values) => {
-        if (values.parent == data.id && data.parent == userInput) {
-          Result.push(values)
-        }
+    if (e.key === 'Enter') {
+      let userInput = e.target.value.toString();
+      let Result = [];
+      Parents.map((data) => {
+        GrandChildren.map(values =>
+          values.parent == data.id && data.parent == userInput ?
+            Result.push(values) : ""
+        )
       })
-    })
-    console.log(Result)
+      console.log(Result)
+    }
   }
   render() {
     return (
       <div className="App">
-        <input placeholder="Enter Category" onChange={this.handleInputChange} />
+        <input placeholder="Enter Category" onKeyPress={this.handleInputChange} />
       </div>
     );
   }
